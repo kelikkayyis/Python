@@ -4,7 +4,11 @@
 - 💞️ I’m looking to collaborate on Machine Learning Projects
 - 📫 How to reach me ...
 
-<!---
-kelikkayyis/kelikkayyis is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-You can click the Preview link to take a look at your changes.
---->
+# Python
+
+Analisis Statistika, Data Mining dan Data Sains dengan menggunakan software Python
+
+Ini adalah repository saya untuk menyimpan ide-ide dalam melakukan analisis data menggunakan software Python. 
+Berdasarkan pengalaman yang saya dapatkan selama berkecimpung dalam dunia analisis data.
+
+Salam, Kelik
