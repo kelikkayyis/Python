@@ -1,5 +1,4 @@
 # mengatur lokasi folder
-
 import os
 from google.colab import drive
 os.chdir('/content/drive/MyDrive/KSO SCISI/Absensi 2021/Absensi 07. Juli 2021')
