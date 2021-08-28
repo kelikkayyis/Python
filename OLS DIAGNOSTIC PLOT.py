@@ -7,31 +7,34 @@ import statsmodels.api as sm
 import matplotlib.pyplot as plt
 from statsmodels.graphics.gofplots import ProbPlot
 
+# setting plot
 plt.style.use('seaborn') # pretty matplotlib plots
 plt.rc('font', size=14)
 plt.rc('figure', titlesize=18)
 plt.rc('axes', labelsize=15)
 plt.rc('axes', titlesize=18)
 
+# skip warning
 import warnings
 warnings.filterwarnings("ignore", category=FutureWarning)
 
-# Data
+# Import Data
 from sklearn.datasets import load_boston
 boston = load_boston()
 X = pd.DataFrame(boston.data, columns=boston.feature_names)
 y = pd.DataFrame(boston.target)
 
-# generate OLS model
+# Create OLS model
 model = sm.OLS(y, sm.add_constant(X))
 model_fit = model.fit()
 # print(model_fit.summary())
 
-# create dataframe from X, y for easier plot handling
+# create dataframe from X, y for easier plot
 dataframe = pd.concat([y, X], axis=1)
 # print('\n', dataframe)
 
 # Asumtion Diagnostic
+
 ## Residuals vs Fitted Plot
 # model values
 model_fitted_y = model_fit.fittedvalues
@@ -48,7 +51,6 @@ model_leverage = model_fit.get_influence().hat_matrix_diag
 # cook's distance, from statsmodels internals
 model_cooks = model_fit.get_influence().cooks_distance[0]
 
-# plot_lm_1 = plt.subplot(2, 2, 1)
 plot_lm_1 = plt.figure(1)
 sns.residplot(model_fitted_y, dataframe.columns[-1], data=dataframe,
                           lowess=True,
@@ -60,7 +62,6 @@ plot_lm_1.axes[0].set_ylabel('Residuals');
 # plt.show()
 
 # Normal Q-Q Plot
-# plot_lm_3 = plt.subplot(2, 2, 3)
 plot_lm_2 = plt.figure(2)
 sorted_student_residuals = pd.Series(model_fit.get_influence().resid_studentized_internal)
 sorted_student_residuals.index = model_fit.resid.index
@@ -83,7 +84,6 @@ for val in top3.index:
 # plt.show()
 
 # Scale-Location
-# plot_lm_3 = plt.subplot(2, 2, 3)
 plot_lm_3 = plt.figure(3)
 plt.scatter(model_fitted_y, model_norm_residuals_abs_sqrt, alpha=0.5);
 sns.regplot(model_fitted_y, model_norm_residuals_abs_sqrt,
@@ -107,7 +107,6 @@ for i in abs_norm_resid_top_3:
 # plt.show()
 
 # Residuals vs Leverage
-# plot_lm_4 = plt.subplot(2, 2, 4)
 plot_lm_4 = plt.figure(4)
 plt.scatter(model_leverage, model_norm_residuals, alpha=0.5);
 sns.regplot(model_leverage, model_norm_residuals,
@@ -128,5 +127,3 @@ for i in leverage_top_3:
                                  xy=(model_leverage[i],
                                      model_norm_residuals[i]));
 plt.show()
-
-# solve the bugs normal qq use sm plot
